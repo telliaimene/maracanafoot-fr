@@ -1,0 +1,36 @@
+import { configureStore, combineReducers ,createStore,compose ,applyMiddleware } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import logger from "redux-logger";
+import rootReducers from "./rootReducers";
+
+const isDev = process.env.NODE_ENV === "development";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const rootReducer = combineReducers(rootReducers);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+const middlewareLogger: any = !!isDev ? logger : [];
+
+export const store = createStore(persistedReducer);
+
+export let persistor = persistStore(store);
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+
+
+

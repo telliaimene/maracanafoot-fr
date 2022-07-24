@@ -1,0 +1,34 @@
+[ 
+  {
+    "id": 1,
+    "author": null,
+    "isModerate":true,
+    "date": "May 20, 2021",
+    "content": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
+    "parentId": null,
+    "like":  96,
+    "childrens": null
+  },
+
+  {
+    "id": 2,
+    "author": null,
+    "isModerate":false,
+    "date": "May 20, 2021",
+    "content": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
+    "parentId": null,
+    "like":  96,
+    "childrens": null
+  },
+  {
+    "id": 3,
+    "author": null,
+    "isModerate":false,
+    "date": "May 20, 2021",
+    "content": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
+    "parentId": null,
+    "like":  96,
+    "childrens": null
+  }
+
+]

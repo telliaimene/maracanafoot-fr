@@ -1,0 +1,64 @@
+
+
+.popular_carousel.pt-15.multipleRowCarousel {
+  .swiper-wrapper {
+    padding-top: 15px;
+  }
+}
+.slider_demo2 {
+  margin-bottom: 8px;
+}
+
+.slider_demo1 {
+  position: relative;
+}
+
+.slider_demo1 {
+  .single_gallary_item {
+    display: block!important;
+  }
+}
+
+.alphabet {
+  a{
+    text-decoration: none;
+  }
+	a:not([href]).active{
+   
+		color: #4F46E5;
+		
+}
+}
+.auteur-item {
+	// font-weight: 300;
+	// font-size: 1.4rem;
+	line-height: 1.5;
+	letter-spacing: 0;
+	text-transform: capitalize;
+
+	i {
+		font-size: 1.3rem;
+		vertical-align: top;
+		margin-top: -.2rem;
+
+		&::before {
+			margin: 0;
+		}
+	}
+
+	a {
+    text-decoration: none;
+		&:hover,
+		&:focus {
+      text-decoration: none;
+			color: #4F46E5;
+		}
+	}
+
+	&.active {
+		color: #4F46E5;
+	}
+
+	
+}
+
