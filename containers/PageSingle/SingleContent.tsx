@@ -16,6 +16,7 @@ import {
   PostDataType,
   ArticleDataType,
 } from "../../data/types";
+import SingleRelatedPosts from "./SingleRelatedPosts";
 export interface SingleContentProps {
   data: ArticleDataType;
   tags?: TaxonomyType[] | undefined;
@@ -114,7 +115,7 @@ const SingleContent: FC<SingleContentProps> = ({ data, tags, id }: any) => {
       </div>
 
       {/* COMMENT FORM */}
-      {/* <div
+       <div
         id="comment"
         ref={commentRef}
         className="max-w-screen-md mx-auto pt-5"
@@ -132,10 +133,10 @@ const SingleContent: FC<SingleContentProps> = ({ data, tags, id }: any) => {
 
         }
       
-      </div>  */}
+      </div>  
 
       {/* COMMENTS LIST */}
-      {/* <div className="max-w-screen-md mx-auto">
+  <div className="max-w-screen-md mx-auto">
       {
         <SingleCommentLists 
         comments={commentList}
@@ -145,7 +146,8 @@ const SingleContent: FC<SingleContentProps> = ({ data, tags, id }: any) => {
         
 
         }
-      </div>  */}
+      </div>
+      <SingleRelatedPosts data={data} />
     </div>
   );
 };

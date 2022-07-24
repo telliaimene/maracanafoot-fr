@@ -17,6 +17,8 @@ import MostShareWidget from "../../components/MostShareWidget";
 import NewsLetter from "../../components/NewsLetter";
 import Spinner from "../../components/spinner";
 import { useRouter } from "next/router";
+import {BillBoard , PopupVideo , Pave , Skyscraper , Megabanner}  from '../../components/Ads'
+
 // import { Spin, Table } from 'antd';
 
 // images
@@ -665,6 +667,9 @@ const SportsPage = () => {
   console.log("all article", internationnal2);
 
   return (
+    <>
+        {/* <PopupVideo video='https://www.youtube.com/watch?v=GLNtbkv4pX0'/> */}
+        <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
     <Fragment>
       <PostCarousel data={allArticle} />
 
@@ -675,6 +680,9 @@ const SportsPage = () => {
           topShare={topShare}
         />
       ) : null}
+            <VideoPost className="pt30 half_bg60" />
+            <Megabanner banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
+
       {fennec.length ? <FeatureNews data={fennec} /> : null}
       <div className="container">
         <div className="row">
@@ -684,13 +692,14 @@ const SportsPage = () => {
             ) : null}
           </div>
           <div className=" col-lg-4">
+          <Pave banner="/images/doc/img/bg/sidebar-1.png"  href="#" width="396px" height="330px"/>
+
             <FollowUs title="Nous Suivre" />
             <MostView />
           </div>
         </div>
       </div>
       {Entretien ? <MixCarousel className="half_bg1" data={Entretien} /> : null}
-      <VideoPost className="pt30 half_bg60" />
       <div className="entertrainments">
         <div className="container">
           <div className="row">
@@ -706,19 +715,21 @@ const SportsPage = () => {
                 <div className="entertrainment_item">
                   <div className="row justify-content-center">
                     <EntertainmentNews data={equipeN} />
+                    <Megabanner banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
+
                   </div>
                 </div>
               </div>
               {internationnal3 ? (
                 <SportsNews data={internationnal3[0]} data2={internationnal3} />
               ) : null}
-              <div className="banner_area mt50 mb60 xs-mt60">
+              {/* <div className="banner_area mt50 mb60 xs-mt60">
                 <Link href="/">
                   <a href="#">
                     <img src="/images/doc/img/bg/banner1.png" alt="banner1" />
                   </a>
                 </Link>
-              </div>
+              </div> */}
               {internationnal4.length ? (
                 <BusinessNews data={internationnal4} />
               ) : null}
@@ -738,13 +749,17 @@ const SportsPage = () => {
                   <UpcomingMatches />{" "}
                 </div> */}
                 <div className="col-lg-12">
+                <Pave banner="/images/doc/img/bg/sidebar-1.png"  href="#" width="396px" height="330px"/>
+
                   <NewsLetter />
                 </div>
                 <div className="col-lg-12">
                   {/* {topTournois? <CategoriesWidget data={topTournois}/>  : nul}  */}
                 </div>
                 <div className="col-lg-12">
-                  <div className="banner2 mb30">
+                <Skyscraper banner="/images/doc/img/bg/sidebar-1.png"  href="#" width="396px" height="600px" />
+
+                  {/* <div className="banner2 mb30">
                     <Link href="/">
                       <a href="#">
                         <img
@@ -753,7 +768,7 @@ const SportsPage = () => {
                         />
                       </a>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -762,7 +777,7 @@ const SportsPage = () => {
       </div>
       <div className="space-70" />
     </Fragment>
-  );
+ </> );
 };
 
 export default SportsPage;

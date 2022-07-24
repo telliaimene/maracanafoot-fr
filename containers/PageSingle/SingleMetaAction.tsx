@@ -9,9 +9,11 @@ import NcDropDown from "../../components/NcDropDown/NcDropDown";
 export interface SingleMetaAction2Props {
   className?: string;
   meta: ArticleDataType ;
+    url:string
 }
 
 const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
+  url,
   className = "",
   meta,
 }) => {
@@ -32,6 +34,7 @@ const countLikes = meta?.likes ? meta.likes.length : 0
         postId={id}
         //stateLiked={false}
         postData={meta}
+        url={url}
         className="!space-x-2.5"
       />:null}
         
@@ -44,10 +47,12 @@ const countLikes = meta?.likes ? meta.likes.length : 0
           postId={id}
           containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
           iconClass="h-5 w-5"
+          url ={url}
         />
         :null}
         <NcDropDown
           className="flex-shrink-0 flex items-center justify-center focus:outline-none h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-full"
+          style={{backgroundColor:'#fff'}}
           renderTrigger={() => (
             <svg
               xmlns="http://www.w3.org/2000/svg"

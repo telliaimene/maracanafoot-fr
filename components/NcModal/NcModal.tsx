@@ -25,7 +25,7 @@ const NcModal: FC<NcModalProps> = ({
   onCloseModal,
 }) => {
   let [isOpen, setIsOpen] = useState(!!isOpenProp);
-
+console.log("trigger text",triggerText)
   function closeModal() {
     if (typeof isOpenProp !== "boolean") {
       setIsOpen(false);
@@ -48,8 +48,8 @@ const NcModal: FC<NcModalProps> = ({
       {renderTrigger ? (
         renderTrigger(openModal)
       ) : (
-        <></>
-        //  <ButtonDropdown onClick={openModal}> {triggerText} </ButtonDropdown>
+        
+         <ButtonDropdown onClick={openModal}>Tags</ButtonDropdown>
       )}
 
       <Transition appear show={isOpen} as={Fragment}>

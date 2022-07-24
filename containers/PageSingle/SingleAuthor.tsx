@@ -38,15 +38,15 @@ let href = '/author?n='+ author?.name +"&p="+ author?.lastname
         <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-200">
           <Link href={href}>{displayName}</Link>
         </h2>
-        <span className="text-sm text-neutral-500 sm:text-base dark:text-neutral-300">
+        {/* <span className="text-sm text-neutral-500 sm:text-base dark:text-neutral-300">
            {desc}
-          <Link 
-          // className="text-primary-6000 font-medium ml-1" 
+          <Link
+          // className="text-primary-6000 font-medium ml-1"
           href={href}>
            <a href= {href} style={{color:"#8f8f8f"}} className="text-primary-6000 font-medium ml-1" >Plus de détails</a>
-         
+
           </Link>
-        </span>
+        </span> */}
       </div>
     </div>
   );

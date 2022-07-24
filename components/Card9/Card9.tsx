@@ -60,6 +60,7 @@ let sport= typearticle ;
     <div
       className={`nc-Card9 relative flex flex-col group rounded-3xl overflow-hidden ${hoverClass} ${className}`}
       data-nc-id="Card9"
+   
     >
       <div className="absolute inset-x-0 top-0 p-3 flex items-center justify-between transition-all opacity-0 z-[-1] group-hover:opacity-100 group-hover:z-10 duration-300">
         {/* <PostCardLikeAndComment className="relative" postData={post} /> */}
@@ -72,7 +73,7 @@ let sport= typearticle ;
         </div>
       ) : ( */}
       
-        <Link href={href}>
+        <Link href={hrefArt}>
           <>
           <NcImage
             containerClassName="absolute inset-0 rounded-3xl"
@@ -91,18 +92,18 @@ let sport= typearticle ;
       {/* )} */}
       {/* className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black" */}
       <Link
-        href={href}
+        href={hrefArt}
         
       >
-           <a href="" className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black" ></a>
+           <a href={hrefArt} className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black" ></a>
       </Link>
       <div className="absolute bottom-0 inset-x-0 p-4 flex flex-col flex-grow">
       {/* className="absolute inset-0" */}
-        <Link href={href} >
-          <a href="" className="absolute inset-0" ></a>
+        <Link href={hrefArt} >
+          <a href={hrefArt} className="absolute inset-0" ></a>
            </Link>
         <div className="mb-3">
-        <CategoryBadgeList categories={category}   typearticle={typearticle}/>
+        <CategoryBadgeList categories={category}  />
         </div>
         {renderMeta()}
       </div>

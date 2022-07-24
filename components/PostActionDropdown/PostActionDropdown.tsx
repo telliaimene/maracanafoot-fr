@@ -8,7 +8,7 @@ import router, { useRouter } from "next/router";
 
 export interface PostActionDropdownProps {
   containerClassName?: string;
-  postData:ArticleDataType | undefined;
+  postData:ArticleDataType ;
   dropdownPositon:boolean;
   iconClass:string
 }

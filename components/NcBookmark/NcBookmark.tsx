@@ -7,6 +7,7 @@ export interface NcBookmarkProps {
   iconClass?: string;
   isBookmarked: boolean;
   postId:string|number;
+  url?:string
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 

@@ -12,6 +12,13 @@ import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { API_LINK } from "../../utils/constantes";
 import axios from "axios";
 import { ArticleDataType } from "../../data/types";
+import FontAwesome from "../uiStyle/FontAwesome";
+
+import Swiper from 'react-id-swiper';
+
+import {mostViewSort} from "../../utils/commonFunctions";
+
+
 
 const data = [
   {
@@ -53,6 +60,41 @@ export interface PageWidgetTabPaneProps {
 }
 
 const WidgetTabPane: FC<PageWidgetTabPaneProps> = ({ arr, a_id, id, dark }) => {
+  const [swiper, setSwiper] = useState<any>(null);
+
+
+  const goNext = () => {
+
+      if (swiper !== null) {
+
+          swiper.slideNext();
+
+      }
+
+  };
+
+
+  const goPrev = () => {
+
+      if (swiper !== null) {
+
+          swiper.slidePrev();
+
+      }
+
+  };
+
+
+  const params = {
+
+      loops: true,
+
+      slidesPerView: 1,
+
+      slidesPerColumn: 6,
+
+  };
+
   return (
     //kanet au lieu div fi plasetha Fade
 
@@ -78,16 +120,14 @@ const WidgetTabPane: FC<PageWidgetTabPaneProps> = ({ arr, a_id, id, dark }) => {
                 <div className="meta2 meta_separator1">
                   <>
                     <Link
-                      href={"/article?" + item.typearticle + "?" + item.title}
+                      href=""
                     >
                       <>
-                        <a
-                          href={
-                            "/article?" + item.typearticle + "?" + item.title
-                          }
-                        >
-                          {item.category}
-                        </a>
+                      <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>
                       </>
                     </Link>
                     <Link
@@ -148,96 +188,297 @@ const WidgetTab: FC<PageWidgetTabProps> = ({
   topShare,
 }) => {
   const [activeTab, setActiveTab] = useState("1");
+  const [swiper, setSwiper] = useState<any>(null);
 
+
+  const goNext = () => {
+
+      if (swiper !== null) {
+
+          swiper.slideNext();
+
+      }
+
+  };
+
+
+  const goPrev = () => {
+
+      if (swiper !== null) {
+
+          swiper.slidePrev();
+
+      }
+
+  };
+
+
+  const params = {
+
+      loops: true,
+
+      slidesPerView: 1,
+
+      slidesPerColumn: 6,
+
+  };
   const toggle = (tab: string) => {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  return (
-    <div className={`widget_tab md-mt-30 ${className}`}>
-      <Tabs>
-        <TabList style={{ display: " inline-flex", width: "100%" }}>
-          <Tab>
-            <Link href="#">
-              <>
-                <a
-                  href="#"
-                  className={classnames({ active: activeTab === "1" })}
-                  onClick={() => {
-                    toggle("1");
-                  }}
-                >
-                  + Lus
-                </a>
-              </>
-            </Link>
-          </Tab>
-          <Tab>
-            <Link href="#">
-              <>
-                <a
-                  href="#"
-                  className={classnames({ active: activeTab === "2" })}
-                  onClick={() => {
-                    toggle("2");
-                  }}
-                >
-                  +Commentés
-                </a>
-              </>
-            </Link>
-          </Tab>
-          <Tab>
-            <Link href="#">
-              <>
-                <a
-                  href="#"
-                  className={classnames({ active: activeTab === "3" })}
-                  onClick={() => {
-                    toggle("3");
-                  }}
-                >
-                  + Partagés{" "}
-                </a>
-              </>
-            </Link>
-          </Tab>
-        </TabList>
-        {/* </Tabs>
-      <Tabs defaultActiveKey={activeTab} id="uncontrolled-tab-example"> */}
-        {/* <Tab eventKey="1" title={activeTab}> */}
-        <TabPanel>
-          <WidgetTabPane
-            dark={dark}
-            a_id={activeTab}
-            id="1"
-            arr={topCount ? topCount : []}
-          />
-          {/* </Tab> */}
-        </TabPanel>
-        <TabPanel>
-          {/* <Tab eventKey="2" title={activeTab}> */}
-          <WidgetTabPane
-            dark={dark}
-            a_id={activeTab}
-            id="2"
-            arr={topComment ? topComment : []}
-          />
-          {/* </Tab> */}
-        </TabPanel>
-        <TabPanel>
-          {/* <Tab eventKey="3" title={activeTab}> */}
-          <WidgetTabPane
-            dark={dark}
-            a_id={activeTab}
-            id="3"
-            arr={topShare ? topShare : []}
-          />
-          {/* </Tab> */}
-        </TabPanel>
-      </Tabs>
+  return (<>
+    <div className="popular_carousel_area mb30 md-mt-30">
+
+    <h2 className="widget-title">Les Plus Lus</h2>
+
+    <div className="popular_carousel pt-15 multipleRowCarousel nav_style1">
+
+        {/*CAROUSEL START*/}
+
+
+            {topCount?.map((item, i) => (
+
+<div key={i} className="single_post type10 widgets_small mb15">
+
+             
+<div className="post_img">
+  <div className="img_wrap">
+    <Link href="/">
+      <img
+        style={{ width: 100, height: 65 }}
+        src={item.image}
+        alt="thumb"
+      />
+    </Link>
+  </div>
+</div>
+<div className="single_post_text">
+  <div className="meta2 meta_separator1">
+    <>
+      <Link
+        href=""
+      >
+        <>
+          <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>
+        </>
+      </Link>
+      <Link
+        href={"/article?" + item.typearticle + "?" + item.title}
+      >
+        <>
+          <a
+            href={
+              "/article?" + item.typearticle + "?" + item.title
+            }
+          >
+            {item.date}
+          </a>
+        </>
+      </Link>
+    </>
+  </div>
+  <Link href={"/article?" + item.typearticle + "?" + item.title}>
+    <>
+      <h4>
+        <a
+          href={"/article?" + item.typearticle + "?" + item.title}
+        >
+          {item.title}{" "}
+        </a>
+      </h4>
+    </>
+  </Link>
+</div>
+
+<div className="space-15" />
+{dark ? (
+<div className="border_white" />
+) : (
+<div className="border_black" />
+)}
+<div className="space-15" />
+
+</div>
+            ))}
+
+   
+
     </div>
-  );
+
+</div>
+<div className="popular_carousel_area mb30 md-mt-30">
+
+<h2 className="widget-title">Les Plus Commentés</h2>
+
+<div className="popular_carousel pt-15 multipleRowCarousel nav_style1">
+
+    {/*CAROUSEL START*/}
+
+
+        {topComment?.map((item, i) => (
+
+            <div key={i} className="single_post type10 widgets_small mb15">
+
+             
+              <div className="post_img">
+                <div className="img_wrap">
+                  <Link href="/">
+                    <img
+                      style={{ width: 100, height: 65 }}
+                      src={item.image}
+                      alt="thumb"
+                    />
+                  </Link>
+                </div>
+              </div>
+              <div className="single_post_text">
+                <div className="meta2 meta_separator1">
+                  <>
+                    <Link
+                      href=""
+                    >
+                      <>
+                      <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>
+                      </>
+                    </Link>
+                    <Link
+                      href={"/article?" + item.typearticle + "?" + item.title}
+                    >
+                      <>
+                        <a
+                          href={
+                            "/article?" + item.typearticle + "?" + item.title
+                          }
+                        >
+                          {item.date}
+                        </a>
+                      </>
+                    </Link>
+                  </>
+                </div>
+                <Link href={"/article?" + item.typearticle + "?" + item.title}>
+                  <>
+                    <h4>
+                      <a
+                        href={"/article?" + item.typearticle + "?" + item.title}
+                      >
+                        {item.title}{" "}
+                      </a>
+                    </h4>
+                  </>
+                </Link>
+              </div>
+            
+            <div className="space-15" />
+            {dark ? (
+              <div className="border_white" />
+            ) : (
+              <div className="border_black" />
+            )}
+            <div className="space-15" />
+
+            </div>
+
+        ))}
+
+
+
+</div>
+
+</div>
+<div className="popular_carousel_area mb30 md-mt-30">
+
+<h2 className="widget-title">Les Plus Partagée</h2>
+
+<div className="popular_carousel pt-15 multipleRowCarousel nav_style1">
+
+    {/*CAROUSEL START*/}
+
+
+        {topShare?.map((item, i) => (
+
+<div key={i} className="single_post type10 widgets_small mb15">
+
+             
+<div className="post_img">
+  <div className="img_wrap">
+    <Link href="/">
+      <img
+        style={{ width: 100, height: 65 }}
+        src={item.image}
+        alt="thumb"
+      />
+    </Link>
+  </div>
+</div>
+<div className="single_post_text">
+  <div className="meta2 meta_separator1">
+    <>
+      <Link
+        href={"/article?" + item.typearticle + "?" + item.title}
+      >
+        <>
+        <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>
+        </>
+      </Link>
+      <Link
+        href={"/article?" + item.typearticle + "?" + item.title}
+      >
+        <>
+          <a
+            href={
+              "/article?" + item.typearticle + "?" + item.title
+            }
+          >
+            {item.date}
+          </a>
+        </>
+      </Link>
+    </>
+  </div>
+  <Link href={"/article?" + item.typearticle + "?" + item.title}>
+    <>
+      <h4>
+        <a
+          href={"/article?" + item.typearticle + "?" + item.title}
+        >
+          {item.title}{" "}
+        </a>
+      </h4>
+    </>
+  </Link>
+</div>
+
+<div className="space-15" />
+{dark ? (
+<div className="border_white" />
+) : (
+<div className="border_black" />
+)}
+<div className="space-15" />
+
+</div>
+        ))}
+
+
+
+</div>
+
+</div>
+
+  </>);
 };
 
 export default WidgetTab;
