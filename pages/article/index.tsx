@@ -1,19 +1,12 @@
 import React, { FC, ReactNode, useEffect, useState } from "react";
 import {
-  PostDataType,
-  PostAuthorType,
-  AuthorType,
-  TaxonomyType,
   ArticleDataType,
-  CommentDataType,
   ArticleType,
 } from "../../data/types";
 import NcImage from "../../components/NcImage/NcImage";
 
 import SingleContent from "../../containers/PageSingle/SingleContent";
-import { CommentType } from "../../data/types";
-import { useAppDispatch } from "../../store/hooks";
-import { changeCurrentPage } from "../../store/pages/pages";
+import { useAppDispatch } from "../../store/hooks"; 
 import { Sidebar } from "../../containers/PageSingle/Sidebar";
 import SingleRelatedPosts from "../../containers/PageSingle/SingleRelatedPosts";
 import SingleHeader from "../../containers/PageSingle/SingleHeader";
@@ -26,8 +19,11 @@ import { API_LINK } from "../../utils/constantes";
 
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next/types";
+import { BillBoard } from "../../components/Ads";
+
 import Head from "next/head";
 
+// var tags = {};
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   console.log("query", ctx.query);
 
@@ -66,19 +62,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
       return data;
     });
-
+  // tags = res;
   console.log({ res });
-  return { props: { data: res } };
+  return { props: { data: res, encoded } };
 };
 
-const PageArticle = ({ data }: any) => {
+
+
+const PageArticle = ({ data, encoded }: any) => {
+
   const dispatch = useAppDispatch();
   const [articleContent, setArticle] = useState<ArticleDataType | undefined>(
     undefined
   );
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  console.log("router in article", router.asPath.split("?")[2]);
+  console.log("router in article",encoded, data) ;
   useEffect(() => {
     if (router.isReady) {
       getArticle();
@@ -100,17 +99,18 @@ const PageArticle = ({ data }: any) => {
 
   async function getArticle() {
     const route = router.asPath.split("?")[2];
-    let title;
-
-    if (route === undefined) {
-      title = router.asPath.split("?")[2];
-    } else {
-      title = router.asPath.split("?")[3];
-    }
+    let title = encoded.split("?")[1]
+console.log("here in article", title)
+    // if (route === undefined) {
+    //   title = router.asPath.split("?")[2];
+    // } else {
+    //   title = router.asPath.split("?")[3];
+    // }
 
     let lng = "FR";
+    console.log("here in article2", API_LINK + "v1/articlesByTitle/" + title + "/" + lng);
     await axios
-      .get(API_LINK + "v1/articlesByTitle/" + route + "/" + lng)
+      .get(API_LINK + "v1/articlesByTitle/" + title + "/" + lng)
       .then((response) => {
         let article: ArticleType = response.data;
         let data: ArticleDataType = {
@@ -144,17 +144,20 @@ const PageArticle = ({ data }: any) => {
         console.log(err);
       });
   }
-  console.log("articleContent", articleContent);
+  console.log("articleContentTest", loading === false && articleContent ,  loading, articleContent);
   if (loading === false && articleContent) {
     return (
       <>
         <Head>
-          <title>Contact </title>
+          <title>{data.title} </title>
           <meta name="description" content={data.description}></meta>
           <meta property="og:title" content={data.title}></meta>
           <meta property="og:description" content={data.descrition}></meta>
           <meta property="og:image" content={data.image}></meta>
-          <meta property="og:type" content="website"></meta>
+          <meta
+            property="og:type"
+            content={`https://www.maracanafoot.fr/article/?https://www.maracanafoot.fr/article/?Football?${encoded}`}
+          ></meta>
         </Head>
         <div
           className={`nc-PageSingleHasSidebar pt-10 lg:pt-16 ${""}`}
@@ -162,18 +165,20 @@ const PageArticle = ({ data }: any) => {
         >
           <HeaderContainer user={user} />
           {/* SINGLE HEADER */}
+          <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
 
           <header className="container pt-10 rounded-xl">
             <div className="max-w-screen-md mx-auto">
-              <SingleHeader pageData={articleContent} titleMainClass="" />
-            </div>
+            <SingleHeader pageData={articleContent} titleMainClass="" url={data.href}/>
+
+</div>
           </header>
 
           {/* FEATURED IMAGE */}
 
           <NcImage
             containerClassName="container my-10 sm:my-12"
-            className="object-cover w-full h-full rounded-xl"
+            className="object-cover w-full h-full rounded-xl center"
             src={articleContent.image}
             //style={{width:"1280px", height:"605px"}}
           />
@@ -189,7 +194,7 @@ const PageArticle = ({ data }: any) => {
           </div>
 
           {/* RELATED POSTS */}
-          <SingleRelatedPosts data={articleContent} />
+         
         </div>
       </>
     );
@@ -202,7 +207,10 @@ const PageArticle = ({ data }: any) => {
           <meta property="og:title" content={data.title}></meta>
           <meta property="og:description" content={data.descrition}></meta>
           <meta property="og:image" content={data.image}></meta>
-          <meta property="og:type" content="article"></meta>
+          <meta
+            property="og:type"
+            content={`https://www.maracanafoot.fr/article/?https://www.maracanafoot.fr/article/?Football?${encoded}`}
+          ></meta>
         </Head>
         <Spinner loading={loading} />
       </>
