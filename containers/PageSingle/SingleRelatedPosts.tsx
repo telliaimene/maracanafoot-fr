@@ -74,8 +74,6 @@ const router = useRouter()
   }
   async function getArticleByAuthor ()  {
     let lng = "FR"
-    console.log("get article by author", API_LINK + 'v1/articlesByAuthor/'+ lng+ '/' + user+'/')
-
     await axios.get(API_LINK + 'v1/articlesByAuthor/'+ lng+ '/' + user+'/')    
       .then(response => {
         let table = response.data.map((item: ArticleType) => {
@@ -139,7 +137,7 @@ const router = useRouter()
          
           </Heading>
           <div className="mb-5 "></div>
-          <div className="grid mt-40 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid mt-40  sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
            {articlesAuthor?.map((post : ArticleDataType) => (
               <Card9 key={post._id} post={post} />
             ))} 

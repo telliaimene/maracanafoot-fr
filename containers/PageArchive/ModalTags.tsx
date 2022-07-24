@@ -8,8 +8,6 @@ export interface ModalTagsProps {
 }
 
 const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
-
-  console.log("in tags component" ,tags)
   const renderModalContent = () => {
     return (
       <div className="flex flex-wrap dark:text-neutral-200">
@@ -26,10 +24,10 @@ const ModalTags: FC<ModalTagsProps> = ({ tags }) => {
         contentExtraClass="max-w-screen-md"
         triggerText={
           <span>
-            <span className="hidden sm:inline">Autre</span> Tags
+            <span className="hidden sm:inline">Other</span> Tags
           </span>
         }
-        modalTitle="Découvrir d'autres tags"
+        modalTitle="Discover other tags"
         renderContent={renderModalContent}
       />
     </div>

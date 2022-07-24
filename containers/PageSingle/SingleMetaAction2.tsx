@@ -3,19 +3,19 @@ import PostActionDropdown from "../../components/PostActionDropdown/PostActionDr
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
 import { SOCIALS_DATA } from "../../components/SocialsShare/SocialsShare";
 import BookmarkContainer from "../../containers/BookmarkContainer/BookmarkContainer";
-import { ArticleDataType, PostDataType } from "../../data/types";
+import { PostDataType } from "../../data/types";
 import NcDropDown from "../../components/NcDropDown/NcDropDown";
 
 export interface SingleMetaAction2Props {
   className?: string;
-  meta: ArticleDataType;
+  meta: PostDataType;
 }
 
 const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
   className = "",
   meta,
 }) => {
-  const { _id } = meta;
+  const { id } = meta;
 
   return (
     <div className={`nc-SingleMetaAction2 ${className}`}>
@@ -33,13 +33,12 @@ const SingleMetaAction2: FC<SingleMetaAction2Props> = ({
         <BookmarkContainer
           // initBookmarked={bookmark.isBookmarked}
            isBookmarked={false}
-          postId={String(_id)}
+          postId={String(id)}
           containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200"
           iconClass="h-5 w-5"
         />
         <NcDropDown
           className="flex-shrink-0 flex items-center justify-center focus:outline-none h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 rounded-full"
-          style={{backgroundColor:'#fff'}}
           renderTrigger={() => (
             <svg
               xmlns="http://www.w3.org/2000/svg"

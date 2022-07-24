@@ -12,7 +12,7 @@ import { PostDataType } from "../../data/types";
 import PostCardLikeAction, {
   PostCardLikeActionProps,
 } from "../../components/PostCardLikeAction/PostCardLikeAction";
-import { UserID, UserMail,onSetRedirectPath } from "../../app/login/auth";
+import { UserID, UserMail } from "../../app/login/auth";
 import { useRouter } from "next/router";
 
 export interface PostCardLikeContainerProps
@@ -20,19 +20,16 @@ export interface PostCardLikeContainerProps
   like: number |undefined;
   liked:boolean ,
   postId:string|number
-  url?:string
 
 }
 
 const PostCardLikeContainer: FC<PostCardLikeContainerProps> = ({
   like,
   postId,liked,
-  url,
   onClickLike,
   ...args
 }) => {
   
-
   const router = useRouter()
   const user = useAppSelector(UserID)
   const recentLikeds = useAppSelector(selectRecentLikeds);
@@ -42,7 +39,7 @@ const PostCardLikeContainer: FC<PostCardLikeContainerProps> = ({
   const [likeCount,setLikeCount]=useState(like)
   
   useEffect(() => {
-    console.log("tiiiimeee-useEffect",url,postId)
+    console.log("tiiiimeee-useEffect",like)
     // setLikeCount(like)
     isLiked()
     
@@ -66,7 +63,7 @@ const PostCardLikeContainer: FC<PostCardLikeContainerProps> = ({
   const handleClickLike = () => {
     console.log("tiiiimeee-click")
     let valueBody
-    if (user){ if (isLike) {
+    if (isLike) {
        valueBody = 
       {
         value:"dislike"
@@ -76,11 +73,7 @@ const PostCardLikeContainer: FC<PostCardLikeContainerProps> = ({
       {
         value:"like"
       }
-    }}else{
-      console.log("API_LINK + url" , API_LINK + url)
-      dispatch(onSetRedirectPath(url?url:"/")), router.push("/login") 
     }
-   
     let URLGet= "v1/articles-likes/"+postId+"/"+user
     axios.put(API_LINK + URLGet, valueBody)
         .then(res => {
