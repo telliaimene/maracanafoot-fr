@@ -26,7 +26,6 @@ import { useRouter } from "next/router";
 import { persistor, store } from "../app/store";
 import MyRouter from "../routers/index";
 import { PersistGate } from "redux-persist/integration/react";
-import { Head } from "next/document";
 
 function MyApp({ Component, pageProps }: any) {
   // const router = useRouter();
@@ -40,38 +39,19 @@ function MyApp({ Component, pageProps }: any) {
   //     console.log("accueil", isShow);
   //   }
   // }, [router.pathname, isShow]);
-
-  const seoPage = Component.seo;
-
-  console.log({ seoPage, pageProps });
   return (
     <div className=" text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
-      {/* <MetaComponent /> */}
       <Provider store={store}>
-        {/* {seoPage ? (
+        {Component.seo ? (
           <Component {...pageProps} />
-        ) : ( */}
-        <PersistGate loading={null} persistor={persistor}>
-          <Component {...pageProps} />
-          {/* {isShow ? <Footer /> : null} */}
-        </PersistGate>
-        {/* )} */}
+        ) : (
+          <PersistGate loading={null} persistor={persistor}>
+            <Component {...pageProps} />
+            {/* {isShow ? <Footer /> : null} */}
+          </PersistGate>
+        )}
       </Provider>
     </div>
   );
 }
-
-const MetaComponent = ({ tags }: any) => {
-  return (
-    <Head>
-      <title>{tags.title} </title>
-      <meta name="description" content={tags.description}></meta>
-      <meta property="og:title" content={tags.title}></meta>
-      <meta property="og:description" content={tags.descrition}></meta>
-      <meta property="og:image" content={tags.image}></meta>
-      <meta property="og:url" content={tags.url} />
-      <meta property="og:type" content="article"></meta>
-    </Head>
-  );
-};
 export default MyApp;
