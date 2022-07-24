@@ -1,4 +1,4 @@
-import React, { useState, useEffect,FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { ArticleDataType } from "../../data/types";
 import Link from "next/link";
 import FontAwesome from "../uiStyle/FontAwesome";
@@ -16,10 +16,10 @@ import Swiper from "react-id-swiper";
 // import blog_small4 from '../../doc/img/blog/blog_small4.jpg';
 // import blog_small5 from '../../doc/img/blog/blog_small5.jpg';
 
- import { mostViewSort } from "../../utils/commonFunctions";
+import { mostViewSort } from "../../utils/commonFunctions";
 import { API_LINK } from "../../utils/constantes";
 import axios from "axios";
-const mostView   = [
+const mostView = [
   {
     image: "/images/doc/img/sports/sports2.jpg",
     category: "TECHNOLOGY",
@@ -83,12 +83,10 @@ const mostView   = [
 ];
 export interface PageSportsCarouselProps {
   dark: boolean;
-  data:ArticleDataType[]
-
+  data: ArticleDataType[];
 }
 
-const SportsCarousel: FC<PageSportsCarouselProps> = ({dark, data }) => {
-
+const SportsCarousel: FC<PageSportsCarouselProps> = ({ dark, data }) => {
   const [swiper, setSwiper] = useState<any>(null);
   const [Loading, setLoading] = useState(true);
 
@@ -98,7 +96,6 @@ const SportsCarousel: FC<PageSportsCarouselProps> = ({dark, data }) => {
     }
   }, [data]);
 
- 
   const goNext = () => {
     if (swiper !== null) {
       swiper.slideNext();
@@ -117,38 +114,62 @@ const SportsCarousel: FC<PageSportsCarouselProps> = ({dark, data }) => {
   };
   return (
     <div className="widget tab_widgets">
-    <div className="post_type2_carousel multipleRowCarousel nav_style1">
+      <div className="post_type2_carousel multipleRowCarousel nav_style1">
         {/*CAROUSEL START*/}
         <Swiper getSwiper={setSwiper} {...params}>
-            {mostViewSort(data).map((item: any, i:number) => (
-                <div key={i} className="single_post2_carousel">
-                    <div className="single_post widgets_small">
-                        <div className="post_img">
-                            <div className="img_wrap">
-                                <Link href="/"><img style ={{	width:"100%" , height: "67px"}} src={item.image} alt="thumb"/></Link>
-                            </div>
-                            <span className="tranding"><FontAwesome name="bolt"/></span>
-                        </div>
-                        <div className="single_post_text">
-                            <div className="meta2"><Link href="/">{item.category}</Link>
-                                <Link href="/">{item.date}</Link>
-                            </div>
-                            <h4><Link href="/post1">{item.title}</Link></h4>
-                        </div>
-                    </div>
-                    <div className="space-15"/>
-                    {dark ? <div className="border_white"/> : <div className="border_black"/>}
-                    <div className="space-15"/>
+          {mostViewSort(data).map((item: any, i: number) => (
+            <div key={i} className="single_post2_carousel">
+              <div className="single_post widgets_small">
+                <div className="post_img">
+                  <div className="img_wrap">
+                    <Link href="/">
+                      <img
+                        style={{ width: "100%", height: "67px" }}
+                        src={item.image}
+                        alt="thumb"
+                      />
+                    </Link>
+                  </div>
+                  <span className="tranding">
+                    <FontAwesome name="bolt" />
+                  </span>
                 </div>
-            ))}
+                <div className="single_post_text">
+                  <div className="meta2">
+                    <Link href="/">
+                      <a>{item.category}</a>
+                    </Link>
+                    <Link href="/">
+                      <a>{item.date}</a>
+                    </Link>
+                  </div>
+                  <h4>
+                    <Link href="/post1">
+                      <a>{item.title}</a>
+                    </Link>
+                  </h4>
+                </div>
+              </div>
+              <div className="space-15" />
+              {dark ? (
+                <div className="border_white" />
+              ) : (
+                <div className="border_black" />
+              )}
+              <div className="space-15" />
+            </div>
+          ))}
         </Swiper>
         <div className="navBtns">
-            <div onClick={goPrev} className="navBtn prevtBtn"><FontAwesome name="angle-left"/></div>
-            <div onClick={goNext} className="navBtn nextBtn"><FontAwesome name="angle-right"/></div>
+          <div onClick={goPrev} className="navBtn prevtBtn">
+            <FontAwesome name="angle-left" />
+          </div>
+          <div onClick={goNext} className="navBtn nextBtn">
+            <FontAwesome name="angle-right" />
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
   );
 };
 

@@ -58,67 +58,67 @@ const Sport: FC<SportProps> = ({ data }) => {
   );
 
 }
-export async function getStaticPaths() {
-  const sports = await fetch(API_LINK + "v1/sport/")
-  const results = await sports.json()
-  const tournois = await fetch(API_LINK + "v1/tournois-sport/Football")
-  const foot :Tournois= {
-    continent: "",
-    coupe: [],
-    entitled: "",
-    entitledAR: "",
-    logo:"",
-    page: [],
-    pays: "",
-    sport: "",
-    teamType: "",
-    type: "",
-    typeAR: "",
-    _id: "",
-  }
-  var Tresults = await tournois.json()
-  Tresults.push(foot)
-  var paths: GetStaticPaths = Tresults.map((t: Tournois,id:number) => {
-    if (id<Tresults.length-1)
-    return (
-      {
-        params: {
-          id: ["Football", t.entitled]
-        },
-      })
-      else 
-      return (
-        {
-          params: {
-            id: ["Football"]
-          },
-        })
+// export async function getStaticPaths() {
+//   const sports = await fetch(API_LINK + "v1/sport/")
+//   const results = await sports.json()
+//   const tournois = await fetch(API_LINK + "v1/tournois-sport/Football")
+//   const foot :Tournois= {
+//     continent: "",
+//     coupe: [],
+//     entitled: "",
+//     entitledAR: "",
+//     logo:"",
+//     page: [],
+//     pays: "",
+//     sport: "",
+//     teamType: "",
+//     type: "",
+//     typeAR: "",
+//     _id: "",
+//   }
+//   var Tresults = await tournois.json()
+//   Tresults.push(foot)
+//   var paths: GetStaticPaths = Tresults.map((t: Tournois,id:number) => {
+//     if (id<Tresults.length-1)
+//     return (
+//       {
+//         params: {
+//           id: ["Football", t.entitled]
+//         },
+//       })
+//       else 
+//       return (
+//         {
+//           params: {
+//             id: ["Football"]
+//           },
+//         })
 
 
-  })
-  console.log(paths);
+//   })
+//   console.log(paths);
   
-  return {
-    paths,
-    fallback: false,
-  }
-};
-export const getStaticProps: GetStaticProps = async (context) => {
-  const params = context.params
-  console.log("proops", params);
-  if (!params) {
-    return {
-      notFound: true,
-    }
-  }
-  return {
-    props: {
-      data: params.id,
-    },
-    revalidate: 60,
-  };
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// };
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   const params = context.params
+//   console.log("proops", params);
+//   if (!params) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+//   return {
+//     props: {
+//       data: params.id,
+//     },
+//     revalidate: 60,
+//   };
 
-}
+// }
 
 reportWebVitals();
 export default Sport;

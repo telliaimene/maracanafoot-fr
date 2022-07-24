@@ -19,7 +19,6 @@ import { API_LINK } from "../../utils/constantes";
 
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next/types";
-import { BillBoard } from "../../components/Ads";
 
 import Head from "next/head";
 
@@ -165,20 +164,18 @@ console.log("here in article", title)
         >
           <HeaderContainer user={user} />
           {/* SINGLE HEADER */}
-          <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
 
           <header className="container pt-10 rounded-xl">
             <div className="max-w-screen-md mx-auto">
-            <SingleHeader pageData={articleContent} titleMainClass="" url={data.href}/>
-
-</div>
+              <SingleHeader pageData={articleContent} titleMainClass="" />
+            </div>
           </header>
 
           {/* FEATURED IMAGE */}
 
           <NcImage
             containerClassName="container my-10 sm:my-12"
-            className="object-cover w-full h-full rounded-xl center"
+            className="object-cover w-full h-full rounded-xl"
             src={articleContent.image}
             //style={{width:"1280px", height:"605px"}}
           />
@@ -194,7 +191,7 @@ console.log("here in article", title)
           </div>
 
           {/* RELATED POSTS */}
-         
+          <SingleRelatedPosts data={articleContent} />
         </div>
       </>
     );
