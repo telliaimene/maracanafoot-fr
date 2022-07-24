@@ -17,6 +17,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import faFacebook from "@fortawesome/fontawesome-free-brands/faFacebook"
 import faTwitter from "@fortawesome/fontawesome-free-brands/faTwitter"
 import faGoogle from "@fortawesome/fontawesome-free-brands/faGoogle"
+import { BillBoard } from "../../components/Ads";
 
 import {
   addNewUser, removeUser ,UserID,UserType ,authRedirectPath,onSetRedirectPath
@@ -97,6 +98,8 @@ const google = faGoogle as IconProp
         <title>Login || Maracana</title>
       </Helmet>
       <HeaderContainer user={userId} />
+      <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
+
       <LayoutPage
         subHeading=""
         headingEmoji="🔑"

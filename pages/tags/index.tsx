@@ -3,6 +3,9 @@ import React, { FC, useEffect, useState } from "react";
 import { PostAuthorType,  AuthorType ,ArticleDataType, ArticleType} from "../../data/types";
 import Pagination from "../../components/Pagination/Pagination";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
+import ModalCategories from "../../containers/PageArchive/ModalCategories";
+import ModalTags from "../../containers/PageArchive/ModalTags";
+
 
 import Nav from "../../components/Nav/Nav";
 import NavItem from "../../components/NavItem/NavItem";
@@ -28,7 +31,7 @@ import { UserID } from "../../app/login/auth";
 import moment from 'moment'
 import { BillBoard } from "../../components/Ads";
 
-export interface PageAuthorProps {
+export interface PageTagsProps {
   className?: string;
   post: ArticleDataType
 }
@@ -43,11 +46,14 @@ const FILTERS = [
 // const TABS = ["Articles", "Favorites", "Saved"];
 const TABS = ["Articles"];
 
-const PageAuthor: FC<PageAuthorProps> = ({ className = "" , post}) => {
+const PageTags: FC<PageTagsProps> = ({ className = "" , post}) => {
   let timeOut: NodeJS.Timeout | null = null;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [tabActive, setTabActive] = useState<string>(TABS[0]);
+  const [tagsArticles, setTags] = useState([])
+  const [loadingT, setLoadingT] = useState(true)
+
 const user= useAppSelector(UserID)
   
 
@@ -83,53 +89,36 @@ const user= useAppSelector(UserID)
   const [idAuth, setIdAuth] = useState("");
 
 useEffect(()=>{
+  console.log("filter", router.asPath.split('?')[1])
     if(router.isReady){
       const filtre = query.filtre? Array.isArray(query.filtre) ? query.filtre[0] : query.filtre:"Recent"
       const page=query.page? Array.isArray(query.page) ? query.page[0] : query.page:""
-      const nom=query.n? Array.isArray(query.n) ? query.n[0] : query.n:""
+      const nom=router.asPath.split('?')[1]
       const prenom=query.p? Array.isArray(query.p) ? query.p[0] : query.p:""
       getOwnArticles(nom,prenom,page ? parseInt(page) : 1, perPage,filtre)
       //getOwnBooks(page ? parseInt(page) : 1, perPage)
-       getAuthor(nom,prenom)
-  }}, [query.page,query.filtre,router.isReady])
-
-  
-  const getAuthor = (nom:String,prenom:String) => {
-    
-    let URLGet= "v1/userByFullName/"+nom +"/"+prenom  // a fixer plus tard the right link
-    axios.get(API_LINK + URLGet).then((Response) => {
-      console.log('authaur', Response.data)
-      const socials = Response.data?.reseaux.splice(0,5)
-      setSocialMedia(socials)
-      setIdAuth(Response.data._id)
-      let result : AuthorType = Response.data
-      let data: PostAuthorType = {
-          id: result._id?result._id:"",
-          firstName:result.name?result.name:"",
-          lastName:result.lastname?result.lastname:"",
-          displayName:result.name + " "+ result.lastname,
-          avatar:result.picture ? API_LINK +result.picture : "https://www.maracanafoot.com/utils/images/avatar-159236__340.webp",
-          bgImage:result.picture ? API_LINK +result.picture : undefined,
-          email:result.mail,
-          count: 0,
-          desc:result.biographie?result.biographie:"",
-          jobName:"",
-          href:"/",
-        }
-   
-      setAuthor(data)
-    }).catch((err) => {
-      console.log('err', err)
-    })
-  
-  }
+      
+       getTags("Football")
+      }}, [query.page,query.filtre,router.isReady])
+      async function getTags(sport: String) {
+        console.log('getTags', API_LINK + 'v1/tagsArticles/FR/Football')
+        await axios.get(API_LINK + 'v1/tagsArticles/FR/Football/')
+          .then(response => {
+      
+            setTags(response.data.slice(0, 14))
+            setLoadingT(false)
+          })
+          .catch(err => {
+      
+            console.log(err)
+          })
+      }
   const getOwnArticles = (nom:string,prenom:string,page:string|number,limit:string|number,filtre:string) => {
-   
      let URLGet
-     
-    URLGet= "v1/getArticlesByAuthorPagination/"+page+"/"+limit+"/"+nom+"/"+prenom+"/"+filtre+'/'
+    URLGet= "v1/articlesByKeyWord/"+page+"/"+limit+"/"+nom+"/"
+    console.log('podcastfiltre', URLGet)
     axios.get(API_LINK + URLGet).then((Response) => {
-      console.log('podcastfiltre', Response.data)
+     
       let data: ArticleDataType []=  Response.data.article.map(( item :ArticleDataType) => {
         
         return {
@@ -162,47 +151,7 @@ useEffect(()=>{
     })
   
   }
-  const getOwnBooks = (page:string|number,limit:string|number) => { // A COMPLETER AVEC RIGHT FUNCTIONS
-    const filtre = query.filtre? Array.isArray(query.filtre) ? query.filtre[0] : query.filtre:"Recent"
-     let URLGet
 
-    URLGet= "v1/getArticlesByAuthorPagination/"+page+"/"+limit+"/"+idAuth+"/"+filtre;
-    axios.get(API_LINK + URLGet).then((Response) => {
-      console.log('podcasttttt', Response.data)
-      let table = Response.data.article.map((item: ArticleDataType) => {
-
-        let cat: string = item.category ?
-          item.category[0] ?
-            item.category == "MERCATO" ?
-              "MERCATO" :
-              item.category == "DISCIPLINE" ? "DISCIPLINE" :
-                item.tournois ?
-                  item.tournois.length > 0 ? item.tournois[0].entitled :
-                    item.typearticle
-                  : "" : "" : ""
-
-        return ({
-          category: cat,
-          date: moment(item.date).format("DD/MM/YYYY"),
-          title: item.title.trim(),
-          resumer: item.resumer,
-          image: API_LINK + item.image,
-          typearticle: item.typearticle,
-          bookmarked : item.bookmarked.length,
-          commentCount : item.comments.length,
-          likes :item.likes?.length
-
-          // href : "/article?"+ item.typearticle +"?" + item.title
-        })
-      })
-      setBooks(table)
-      setTotalCount(Response.data.count);
-      setTotalcount(Response.data.article.length);
-    }).catch((err) => {
-      console.log('err', err)
-    })
-  
-  }
   
   // const activePosts = useDemoTabFilter({
   //   isLoading,
@@ -211,6 +160,7 @@ useEffect(()=>{
   //   newPosts:Articles, 
   //   tabActive,
   // })
+
   return ( 
     
     <div className={`nc-PageAuthor  ${className}`} data-nc-id="PageAuthor">
@@ -218,55 +168,38 @@ useEffect(()=>{
  <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
 
       <Helmet>
-        <title>Auteur || Maracana</title>
+        <title>Tags || Maracana</title>
       </Helmet>
 
       {/* HEADER */}
-      <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
-        <div className="rounded-3xl md:rounded-[40px] relative aspect-w-16 aspect-h-12 sm:aspect-h-7 xl:sm:aspect-h-6 overflow-hidden ">
+      <div className="w-full px-2 xl:max-w-screen-2xl mx-auto" style={{width:"85%"}}>
+        <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-8 xl:aspect-h-6 overflow-hidden ">
           <NcImage
+         
             containerClassName="absolute inset-0"
-            src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
             className="object-cover w-full h-full"
           />
-        </div>
-        <div className="relative container -mt-20 lg:-mt-nn">
-          <div className="p-3 bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 lg:p-16 rounded-[40px]  flex flex-col sm:flex-row sm:items-center">
-            <Avatar
-              containerClassName="ring-4 ring-white dark:ring-0 "
-              imgUrl={Author?.avatar}
-              sizeClass="w-20 h-20 text-xl lg:text-2xl lg:w-36 lg:h-36"
-              radius="rounded-full"
-            />
-            <div className="mt-3 sm:mt-0 sm:ml-8 space-y-4 max-w-lg">
-              <h2 className="inline-block text-2xl sm:text-3xl md:text-4xl font-semibold">
-                {Author?.displayName}
-              </h2>
-              <span className="block text-sm text-neutral-6000 dark:text-neutral-300 md:text-base">
-                {Author?.desc}
-              </span>
-              <SocialsList socialsMedia={socialMedia} />
-            </div>
+          <div className="absolute inset-0 bg-black text-white bg-opacity-30 flex flex-col items-center justify-center">
+            <h2 className="inline-block align-middle text-5xl font-semibold md:text-7xl ">
+            Garden
+            </h2>
+            <span className="block mt-4 text-neutral-300">
+              13 Articles
+            </span>
           </div>
         </div>
       </div>
+
       {/* ====================== END HEADER ====================== */}
 
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
-        <main>
-          {/* TABS FILTER */}
+        <div>
           <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
-            <Nav className="sm:space-x-2">
-              {TABS.map((item, index) => (
-                <NavItem
-                  key={index}
-                  isActive={tabActive === item}
-                  onClick={() => handleClickTab(item)}
-                >
-                  {item}
-                </NavItem>
-              ))}
-            </Nav>
+            <div className="flex space-x-2.5">
+              {/* <ModalCategories categories={DEMO_CATEGORIES} /> */}
+              <ModalTags tags={tagsArticles} />
+            </div>
             <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
             <div className="flex justify-end">
               <ArchiveFilterListBox lists={FILTERS} router={router}/>
@@ -289,7 +222,7 @@ useEffect(()=>{
               )}
             {/* <ButtonPrimary>Show me more</ButtonPrimary> */}
           </div>
-        </main>
+          </div>
 
         {/* === SECTION 5 === */}
         {/* <div className="relative py-16">
@@ -316,4 +249,4 @@ useEffect(()=>{
   );
 };
 
-export default PageAuthor;
+export default PageTags;

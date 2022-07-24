@@ -12,6 +12,8 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { useRouter } from 'next/router';
 import Spinner from '../../components/spinner';
 import Pagination from '../../components/Pagination/Pagination';
+import { BillBoard } from "../../components/Ads";
+
 export interface JournalI {
     _id: String | number
     numero: string
@@ -125,6 +127,8 @@ function Journal() {
     return (
         <>
             <HeaderContainer user={userId} />
+            <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
+
             {isLoading ?
                 //<></>:
                 <Spinner loading={isLoading} /> :
