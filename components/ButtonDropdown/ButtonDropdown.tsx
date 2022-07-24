@@ -11,7 +11,6 @@ const ButtonDropdown: FC<ButtonDropdownProps> = ({
   children,
   ...args
 }) => {
-  console.log("children", children)
   return (
     <Button
       className="text-neutral-700 border border-neutral-200 dark:text-neutral-200 dark:border-neutral-700"

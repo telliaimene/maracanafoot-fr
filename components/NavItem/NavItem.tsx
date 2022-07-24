@@ -1,6 +1,5 @@
 import React, { FC, ReactNode } from "react";
 import twFocusClass from "../../utils/twFocusClass";
-import Button from "../Button/Button";
 
 export interface NavItemProps {
   className?: string;
@@ -22,7 +21,7 @@ const NavItem: FC<NavItemProps> = ({
   return (
     <li className="nc-NavItem relative" data-nc-id="NavItem">
       {renderX && renderX}
-      <Button
+      <button
         className={`block !leading-none font-medium ${className} ${radius} ${
           isActive
             ? "bg-secondary-900 text-secondary-50 "
@@ -33,7 +32,7 @@ const NavItem: FC<NavItemProps> = ({
         }}
       >
         {children}
-      </Button>
+      </button>
     </li>
   );
 };

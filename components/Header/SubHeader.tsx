@@ -5,36 +5,32 @@ import { PageItemType } from "../../store/pages/pages";
 export interface HeaderProps {
   mainNavStyle?: "style1" | "style2";
   currentPage: PageItemType;
-  user: string | number;
-  competition?: string;
+  user:string|number
+  competition?:string
 }
 
-const SubHeader: FC<HeaderProps> = ({
-  mainNavStyle = "style1",
-  currentPage,
-  user,
-}) => {
+const SubHeader: FC<HeaderProps> = ({ mainNavStyle = "style1", currentPage ,user}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mainMenuRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   //
-  // let prevScrollpos = window?.pageYOffset;
+  let prevScrollpos = window?.pageYOffset;
   //
   const showSingleMenu = currentPage.type === "/single/:slug";
   //
   const [isSingleHeaderShowing, setIsSingleHeaderShowing] = useState(false);
   const [isTop, setIsTop] = useState(true);
 
-  // useEffect(() => {
-  //   if (!mainMenuRef.current) {
-  //     return;
-  //   }
-  //   let mainMenuHeight = mainMenuRef.current.offsetHeight;
+  useEffect(() => {
+    if (!mainMenuRef.current) {
+      return;
+    }
+    let mainMenuHeight = mainMenuRef.current.offsetHeight;
 
-  //   window.onscroll = function () {
-  //     showHideHeaderMenu(mainMenuHeight);
-  //   };
-  // }, []);
+    window.onscroll = function () {
+      showHideHeaderMenu(mainMenuHeight);
+    };
+  }, []);
 
   useEffect(() => {
     if (showSingleMenu) {
@@ -82,32 +78,32 @@ const SubHeader: FC<HeaderProps> = ({
     }
   };
 
-  // const showHideHeaderMenu = (mainMenuHeight: number) => {
-  //   let currentScrollPos = window?.pageYOffset;
-  //   if (!containerRef.current) return;
-  //   if (!mainMenuRef.current) return;
+  const showHideHeaderMenu = (mainMenuHeight: number) => {
+    let currentScrollPos = window?.pageYOffset;
+    if (!containerRef.current) return;
+    if (!mainMenuRef.current) return;
 
-  //   // SET BG
-  //   if (prevScrollpos < currentScrollPos) {
-  //     currentScrollPos > mainMenuHeight ? setIsTop(false) : setIsTop(true);
-  //   } else {
-  //     currentScrollPos > 0 ? setIsTop(false) : setIsTop(true);
-  //   }
+    // SET BG
+    if (prevScrollpos < currentScrollPos) {
+      currentScrollPos > mainMenuHeight ? setIsTop(false) : setIsTop(true);
+    } else {
+      currentScrollPos > 0 ? setIsTop(false) : setIsTop(true);
+    }
 
-  //   // SHOW _ HIDE MAIN MENU
-  //   if (prevScrollpos > currentScrollPos) {
-  //     containerRef.current.style.top = "0";
-  //   } else {
-  //     containerRef.current.style.top = `-${mainMenuHeight + 2}px`;
-  //   }
-  //   prevScrollpos = currentScrollPos;
-  // };
+    // SHOW _ HIDE MAIN MENU
+    if (prevScrollpos > currentScrollPos) {
+      containerRef.current.style.top = "0";
+    } else {
+      containerRef.current.style.top = `-${mainMenuHeight + 2}px`;
+    }
+    prevScrollpos = currentScrollPos;
+  };
 
   const renderMainNav = () => {
-    console.log("mainNavStyle", mainNavStyle);
+    console.log("mainNavStyle",mainNavStyle)
     switch (mainNavStyle) {
       case "style1":
-        return <MainNav2 isTop={isTop} user={user} />;
+        return <MainNav2 isTop={isTop} user={user}/>;
 
       default:
         return <MainNav2 isTop={isTop} user={user} />;

@@ -101,7 +101,7 @@ const NcImage: FC<NcImageProps> = ({
        <>
       { console.log("image",__src)}
       {__src ? (
-        <img src={__src} className={className} alt={alt} {...args}  style={{width:"991px" , height:"470px" , marginLeft:"auto", marginRight:"auto" }} />
+        <img src={__src} className={className} alt={alt} {...args} />
       ) : (
         <div
           className={`${className} bg-neutral-200 dark:bg-neutral-6000`}

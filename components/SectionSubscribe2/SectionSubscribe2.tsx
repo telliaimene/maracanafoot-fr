@@ -16,11 +16,12 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
       data-nc-id="SectionSubscribe2"
     >
       <div className="flex-shrink-0 mb-14 lg:mb-0 lg:mr-10 lg:w-2/5">
-        <h2 className="font-semibold text-4xl">RECEVEZ NOTRE NEWSLETTER 🎉</h2>
+        <h2 className="font-semibold text-4xl">Join our newsletter 🎉</h2>
         <span className="block mt-6 text-neutral-500 dark:text-neutral-400">
-        Inscrivez-vous ci-dessous pour recevoir notre lettre d’information et ne rien rater de l’actualité.
+          Read and share new perspectives on just about any topic. Everyone’s
+          welcome.
         </span>
-        {/* <ul className="space-y-5 mt-10">
+        <ul className="space-y-5 mt-10">
           <li className="flex items-center space-x-4">
             <Badge name="01" />
             <span className="font-medium text-neutral-700 dark:text-neutral-300">
@@ -33,13 +34,12 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
               Get premium magazines
             </span>
           </li>
-        </ul> */}
+        </ul>
         <form className="mt-10 relative max-w-sm">
-
           <Input
             required
             aria-required
-            placeholder="votre adresse email"
+            placeholder="Enter your email"
             type="email"
           />
           <ButtonCircle
@@ -50,9 +50,9 @@ const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
           </ButtonCircle>
         </form>
       </div>
-      {/* <div className="flex-grow">
+      <div className="flex-grow">
         <NcImage src="/images/SVG-subcribe2.png" />
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState , useEffect,FC } from "react";
 import Link from "next/link";
 import Swiper from "react-id-swiper";
 import SwiperCore, { Autoplay } from 'swiper';
@@ -13,6 +13,7 @@ import { ArticleDataType } from "../../data/types";
 import FontAwesome from "../uiStyle/FontAwesome";
 import { API_LINK } from '../../utils/constantes';
 import axios from 'axios';
+
 
 const postSlider = [
   {
@@ -49,11 +50,11 @@ const postSlider = [
 SwiperCore.use([Autoplay]);
 export interface PagePostCarouselProps {
   className?: string;
-  data: ArticleDataType[]
+  data:ArticleDataType[]
 }
 
 const PostCarousel: FC<PagePostCarouselProps> = ({ className, data }) => {
-  console.log("post data", data)
+  console.log("post data",data)
   const [swiper, setSwiper] = useState<any>(null);
 
   console.log("item type article", data)
@@ -73,7 +74,7 @@ const PostCarousel: FC<PagePostCarouselProps> = ({ className, data }) => {
     slidesPerView: 3,
     spaceBetween: 20,
     loop: true,
-
+   
     breakpoints: {
       1024: {
         slidesPerView: 3,
@@ -93,7 +94,7 @@ const PostCarousel: FC<PagePostCarouselProps> = ({ className, data }) => {
       },
     },
   };
-
+  
   return (
     <div className={className ? className : ""}>
       <div className="container">
@@ -102,67 +103,56 @@ const PostCarousel: FC<PagePostCarouselProps> = ({ className, data }) => {
             <div className="carousel_posts1 owl-carousel nav_style2 mb40 mt30">
               {/*CAROUSEL START*/}
               <div className="px-4 position-relative">
-                {data.length ? <>
-                  <Swiper
-                    autoplay={{ delay: 5000 }}
-                    getSwiper={setSwiper}
-                    //className="trancarousel"
-                    {...params}
-                  >
-                    {data.map((item, i) => {
-                      return (
-
-                        <div
-                          key={i}
-                          className="single_post widgets_small post_type5"
-                        >
-                          <div className="post_img">
-                            <div className="img_wrap">
-
-                              <Link href={"/article?" + item.typearticle + "?" + item.title}>
-                                <>
-                                {console.log("image slider", item.image.split('.')[0]+item.image.split('.')[1] +".png")}
-                                  {/* <div class="embed-responsive">
+                {data.length? <>
+                <Swiper
+                 autoplay={{ delay: 5000 }}
+                  getSwiper={setSwiper}
+                  //className="trancarousel"
+                  {...params}
+                >
+                   { data.map((item, i) => {
+                     return (
+                
+                    <div
+                      key={i}
+                      className="single_post widgets_small post_type5"
+                    >
+                      <div className="post_img">
+                        <div className="img_wrap">
+                      
+                          <Link href={"/article?"+ item.typearticle +"?" + item.title}>
+                          <>
+                          {/* <div class="embed-responsive">
                           </div> */}
-                                  <picture>
-                                    <source srcSet={item.image} type="image/webp" />
-                                    <img src={item.image.split('.')[0]+item.image.split('.')[1] +".png"} alt="My image" />
-                                  </picture>
-
-
-                                </>
-                              </Link>
-
-                            </div>
-                            <span className="tranding">
-                              <FontAwesome name="bolt" />
-                            </span>
-                          </div>
-
-                          <div className="single_post_text">
-                            <Link href={"/article?" + item.typearticle + "?" + item.title}>
-                              <>
-                                <h4>
-                                  {" "}
-                                  <a href={"/article?" + item.typearticle + "?" + item.title}>{item.title} </a>
-                                </h4>
-                              </>
-                            </Link>
-                            {/* <p>{item.body.substring(0,150)}</p> */}
-                          </div>
+                            <img  src={item.image} alt="slider5" />
+                           
+                            </>
+                          </Link>
                         </div>
-                      )
-                    })}
-                  </Swiper>
-                  <div className="owl-nav">
-                    <div onClick={goPrev} className="owl-prev">
-                      <FontAwesome name="angle-left" />
+                      </div>
+                      <div className="single_post_text">
+                        <Link href={"/article?"+ item.typearticle +"?" + item.title}>
+                          <>
+                            <h4>
+                              {" "}
+                              <a href={"/article?"+ item.typearticle +"?" + item.title}>{item.title} </a>
+                            </h4>
+                          </>
+                        </Link>
+                        {/* <p>{item.body.substring(0,150)}</p> */}
+                      </div>
                     </div>
-                    <div onClick={goNext} className="owl-next">
-                      <FontAwesome name="angle-right" />
-                    </div>
-                  </div> </> : null}
-
+                   )})}  
+                </Swiper>
+                <div className="owl-nav">
+                  <div onClick={goPrev} className="owl-prev">
+                    <FontAwesome name="angle-left" />
+                  </div>
+                  <div onClick={goNext} className="owl-next">
+                    <FontAwesome name="angle-right" />
+                  </div>
+                </div> </>: null}
+               
               </div>
             </div>
             {/*CAROUSEL END*/}
