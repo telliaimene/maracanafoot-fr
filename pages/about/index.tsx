@@ -7,8 +7,6 @@ import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscri
 import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
 import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
 import HeaderContainer from "../../containers/HeaderContainer/HeaderContainer";
-import { BillBoard } from "../../components/Ads";
-
 import {
   addNewUser,
   removeUser,
@@ -32,8 +30,6 @@ const PageAbout: FC<PageAboutProps> = (props) => {
         <title>About || Blog Magazine React Template</title>
       </Helmet>
       <HeaderContainer user={userId} />
-      <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
-
       {/* ======== BG GLASS ======== */}
       <BgGlassmorphism />
 
