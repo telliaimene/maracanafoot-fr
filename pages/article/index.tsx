@@ -68,10 +68,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     });
 
   console.log({ res });
-  return { props: { data: res } };
+  return { props: { data: res, encoded } };
 };
 
-const PageArticle = ({ data }: any) => {
+const PageArticle = ({ data , encoded }: any) => {
   const dispatch = useAppDispatch();
   const [articleContent, setArticle] = useState<ArticleDataType | undefined>(
     undefined
@@ -100,17 +100,16 @@ const PageArticle = ({ data }: any) => {
 
   async function getArticle() {
     const route = router.asPath.split("?")[2];
-    let title;
-
-    if (route === undefined) {
-      title = router.asPath.split("?")[2];
-    } else {
-      title = router.asPath.split("?")[3];
-    }
+    let title = encoded.split("?")[1]
+    // if (route === undefined) {
+    //   title = router.asPath.split("?")[2];
+    // } else {
+    //   title = router.asPath.split("?")[3];
+    // }
 
     let lng = "FR";
     await axios
-      .get(API_LINK + "v1/articlesByTitle/" + route + "/" + lng)
+      .get(API_LINK + "v1/articlesByTitle/" + title + "/" + lng)
       .then((response) => {
         let article: ArticleType = response.data;
         let data: ArticleDataType = {
