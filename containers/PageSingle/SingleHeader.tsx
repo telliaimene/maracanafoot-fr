@@ -12,9 +12,10 @@ export interface SingleHeaderProps {
   metaActionStyle?: "style1" | "style2";
   titleMainClass?: string;
   className?: string;
+    url:string
 }
 
-const SingleHeader: FC<SingleHeaderProps> = ({pageData,titleMainClass, hiddenDesc = false,
+const SingleHeader: FC<SingleHeaderProps> = ({pageData,titleMainClass, hiddenDesc = false,url,
   className = "",
   metaActionStyle = "style1",
 }) => {
@@ -44,7 +45,7 @@ console.log('pageData article',category)
               hiddenCategories
               avatarRounded="rounded-full shadow-inner"
             />
-            <SingleMetaAction meta={pageData} />
+            <SingleMetaAction meta={pageData} url ={url} />
           </div>
         </div>
 

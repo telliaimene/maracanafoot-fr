@@ -7,6 +7,7 @@ export interface PostCardLikeAndCommentProps {
   className?: string;
   itemClass?: string;
   postData: ArticleDataType;
+  url?:string;
   postId: ArticleDataType["_id"];
   hiddenCommentOnMobile?: boolean;
   onClickLike?: (id: ArticleDataType["_id"]) => void;
@@ -15,6 +16,7 @@ export interface PostCardLikeAndCommentProps {
 const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
   className = "",
   itemClass = "px-3 h-8 text-xs",
+  url,
   hiddenCommentOnMobile = true,
   postData,
   onClickLike = () => {},
@@ -30,6 +32,7 @@ const PostCardLikeAndComment: FC<PostCardLikeAndCommentProps> = ({
         like={postData?.likes?.length}
         liked={postData?postData.likes ? postData.likes.length>0 ?true : false :false:false}
         onClickLike={onClickLike}
+        url={url ?url :undefined}
         postId={postData._id}
     
       />

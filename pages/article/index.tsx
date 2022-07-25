@@ -164,7 +164,7 @@ const PageArticle = ({ data , encoded }: any) => {
 
           <header className="container pt-10 rounded-xl">
             <div className="max-w-screen-md mx-auto">
-              <SingleHeader pageData={articleContent} titleMainClass="" />
+            <SingleHeader pageData={articleContent} titleMainClass="" url={data.href}/>
             </div>
           </header>
 
@@ -188,7 +188,7 @@ const PageArticle = ({ data , encoded }: any) => {
           </div>
 
           {/* RELATED POSTS */}
-          <SingleRelatedPosts data={articleContent} />
+          {/* <SingleRelatedPosts data={articleContent} /> */}
         </div>
       </>
     );

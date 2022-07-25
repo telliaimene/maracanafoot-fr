@@ -5,7 +5,7 @@ export interface AvatarProps {
   containerClassName?: string;
   sizeClass?: string;
   radius?: string;
-  imgUrl?: string;
+  imgUrl? :string;
   userName?: string;
 }
 
