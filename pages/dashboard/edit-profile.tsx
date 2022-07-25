@@ -48,7 +48,7 @@ const DashboardEditProfile = () => {
     }
   }, [user]);
   useEffect(() => {
-    console.log("parametres",date,moment(date).format("DD/MM/yyyy"),name,lastname,ville,sexe,pays,code,phonePart,pseudo,mail)
+    console.log("parametres",moment(date).format("DD/MM/yyyy"),name,lastname,ville,sexe,pays,code,phonePart,pseudo,mail)
   }, [date,name,lastname,ville,sexe,pays,code,phonePart,pseudo,mail]);
   function getUser(user: string | number) {
     axios

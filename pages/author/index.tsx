@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 
-import { PostAuthorType, PostDataType, AuthorType ,ArticleDataType, ArticleType} from "../../data/types";
+import { PostAuthorType,  AuthorType ,ArticleDataType, ArticleType} from "../../data/types";
 import Pagination from "../../components/Pagination/Pagination";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
 
@@ -18,7 +18,7 @@ import SectionGridCategoryBox from "../../components/SectionGridCategoryBox/Sect
 import { DEMO_CATEGORIES } from "../../data/taxonomies";
 import ButtonSecondary from "../../components/Button/ButtonSecondary";
 import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
-import NcImage from "../../components/NcImage/NcImage";
+import NcImage from "../../components/NcImage/NcImageAuthor";
 import { API_LINK } from "../../utils/constantes";
 import axios from 'axios'
  import { useRouter } from "next/router";
@@ -26,9 +26,11 @@ import HeaderContainer from "../../containers/HeaderContainer/HeaderContainer";
 import { useAppSelector } from "../../store/hooks";
 import { UserID } from "../../app/login/auth";
 import moment from 'moment'
+import { BillBoard } from "../../components/Ads";
 
 export interface PageAuthorProps {
   className?: string;
+  post: ArticleDataType
 }
 
 const FILTERS = [
@@ -41,7 +43,7 @@ const FILTERS = [
 // const TABS = ["Articles", "Favorites", "Saved"];
 const TABS = ["Articles"];
 
-const PageAuthor: FC<PageAuthorProps> = ({ className = "" }) => {
+const PageAuthor: FC<PageAuthorProps> = ({ className = "" , post}) => {
   let timeOut: NodeJS.Timeout | null = null;
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -131,12 +133,12 @@ useEffect(()=>{
       let data: ArticleDataType []=  Response.data.article.map(( item :ArticleDataType) => {
         
         return {
-          id: item._id,
+          _id: item._id,
           count: 0,
           title: item.title,
           href: "/",
           desc: item.resumer,
-          featuredImage: API_LINK + item.image,
+          image: API_LINK + item.image,
           commentCount: item.comments.length,
           viewdCount: 584,
           readingTime: item.countVisit,
@@ -213,7 +215,8 @@ useEffect(()=>{
     
     <div className={`nc-PageAuthor  ${className}`} data-nc-id="PageAuthor">
  <> <HeaderContainer  user={user}/>
-    
+ <BillBoard banner="/images/doc/img/bg/sidebar-1.png"  href="#"/>
+
       <Helmet>
         <title>Auteur || Maracana</title>
       </Helmet>

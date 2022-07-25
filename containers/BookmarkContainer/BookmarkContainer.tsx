@@ -1,7 +1,7 @@
 import NcBookmark, { NcBookmarkProps } from "../../components/NcBookmark/NcBookmark";
 import React,{useEffect,useState} from "react";
-import { useAppSelector } from "../../store/hooks";
-import { UserID } from "../../app/login/auth";
+import { useAppSelector,useAppDispatch } from "../../store/hooks";
+import { UserID , onSetRedirectPath} from "../../app/login/auth";
 import {
   addNewSavedByPostId,
   removeSavedByPostId,
@@ -12,10 +12,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { API_LINK } from "../../utils/constantes";
 
-export type BookmarkContainerProps = Omit<NcBookmarkProps, ""> 
+export type BookmarkContainerProps = Omit<NcBookmarkProps, "">  
 
 const BookmarkContainer: React.FC<BookmarkContainerProps> = (props) => {
-  const { postId ,isBookmarked} = props;
+  const { postId ,isBookmarked, url} = props;
   console.log('bookmark',isBookmarked)
   // const isBookmarked = () => {
   //   if (recentSaveds.includes(postId)) {
@@ -37,7 +37,7 @@ const BookmarkContainer: React.FC<BookmarkContainerProps> = (props) => {
   const router = useRouter()
   const user= useAppSelector(UserID)
   const [isSaved,setIsSaved]= useState(isBookmarked)
-  
+  const dispatch = useAppDispatch();
   useEffect(() => {
     ArticleIsBookmarked()
   
@@ -62,7 +62,7 @@ const BookmarkContainer: React.FC<BookmarkContainerProps> = (props) => {
   const handleClickBookmark = () => {
     let URLGet
       URLGet ="v1/setBookmarkArticle"
-   
+   if(user){
     console.log("tiiiimeee-click")
     let valueBody
     if (isSaved) {
@@ -80,17 +80,23 @@ const BookmarkContainer: React.FC<BookmarkContainerProps> = (props) => {
         value:"saved"
       }
     }
-    
     axios.put(API_LINK + URLGet, valueBody)
-        .then(res => {
-              console.log("hdfgdjkfgb",res.data)
-              //setLikeCount(res.data.likes.length)
-              setIsSaved(!isSaved)
-        })
-        .catch(err => {
-            console.log("err", err)
-            console.log('add like/dislike failed',err)
-        })
+    .then(res => {
+          console.log("hdfgdjkfgb",res.data)
+          //setLikeCount(res.data.likes.length)
+          setIsSaved(!isSaved)
+    })
+    .catch(err => {
+        console.log("err", err)
+        console.log('add like/dislike failed',err)
+    })
+   }else{
+    dispatch(onSetRedirectPath(url ? url : "/")), router.push("/login") 
+
+   }
+   
+    
+  
 
   };
   return (
@@ -99,6 +105,7 @@ const BookmarkContainer: React.FC<BookmarkContainerProps> = (props) => {
       isBookmarked={isSaved}
       // {...props}
       postId={postId}
+      url={url}
     />
   );
 };

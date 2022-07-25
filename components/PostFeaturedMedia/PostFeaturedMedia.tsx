@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import NcImage from "../../components/NcImage/NcImage";
-import { ArticleDataType, PostDataType } from "../../data/types";
+import { ArticleDataType } from "../../data/types";
 
 
 import PostTypeFeaturedIcon from "../../components/PostTypeFeaturedIcon/PostTypeFeaturedIcon";
@@ -18,30 +18,24 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
   post,
   isHover = false,
 }) => {
-  const { image, postType, videoUrl, galleryImgs, audioUrl } = post;
+  console.log("post page author", post)
+  const { image, postType} = post;
 
   const isPostMedia = () => postType === "video" || postType === "audio";
 
-  const renderGallerySlider = () => {
-    if (!galleryImgs) return null;
-    return <div></div>
-  };
+
 
   const renderContent = () => {
     // GALLERY
     if (postType === "gallery") {
-      return renderGallerySlider();
+      return <div></div>;
     }
 
     // VIDEO
-    if (postType === "video" && !!videoUrl && isHover) {
-      return <div></div>;
-    }
+   
 
     // AUDIO
-    if (postType === "audio" && !!audioUrl) {
-      return <div></div>;
-    }
+ 
 
     // ICON
     return (
@@ -65,7 +59,7 @@ const PostFeaturedMedia: FC<PostFeaturedMediaProps> = ({
       className={`nc-PostFeaturedMedia relative ${className}`}
       data-nc-id="PostFeaturedMedia"
     >
-      <NcImage containerClassName="absolute inset-0" src={postType == 'standard'? image: post?.image} />
+      <NcImage containerClassName="absolute inset-0" src={postType == 'standard'? image: image} />
       {renderContent()}
     </div>
   );

@@ -86,8 +86,10 @@ const MixCarousel: FC<PageMixCarouselProps> = ({ className, dark, data }) => {
     },
   };
   return (
+    <>
+    {data.length>0? 
     <div className={`mix_area ${className ? className : ""}`}>
-    {data.length>0?  
+     
     <div className="container">
 
         <div className="row">
@@ -163,7 +165,7 @@ const MixCarousel: FC<PageMixCarouselProps> = ({ className, dark, data }) => {
           </div>
         </div>
         
-      </div>: null}
+      </div>
       <div className="space-30" />
       {/* <ModalVideo
         channel="youtube"
@@ -171,8 +173,8 @@ const MixCarousel: FC<PageMixCarouselProps> = ({ className, dark, data }) => {
         videoId={videoId}
         onClose={() => setvModal(false)}
       /> */}
-    </div>
-  );
+    </div>: null}
+ </> );
 };
 
 export default MixCarousel;

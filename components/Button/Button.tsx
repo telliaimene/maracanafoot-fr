@@ -76,7 +76,7 @@ const Button: FC<ButtonProps> = ({
       className={`${CLASSES}`}
       onClick={onClick}
       type={type}
-      style={{backgroundColor:"#061DA5"}}
+      style={{backgroundColor:"#061DA5" , color:"#fff"}}
     
     >
       {loading && _renderLoading()}

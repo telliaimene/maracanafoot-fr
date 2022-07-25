@@ -93,15 +93,19 @@ useEffect(() => {
                             }} src={item.image} alt="thumb" />
                             </a>
                   </div>
-                  <span className="tranding">
+                  {/* <span className="tranding">
                     <FontAwesome name="bolt" />
-                  </span>
+                  </span> */}
                 </div>
                 <div className="single_post_text">
                   <div className="meta2">
-                    <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
+                    <Link href="">
                       <>
-                        <a href={"/article?"+ item.typearticle  +"?" + item.title} >{item.category} </a>
+                      <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>
                       </>
                     </Link>
                     <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
@@ -146,15 +150,19 @@ useEffect(() => {
                               height:'77px'
                             }} src={item.image} alt="thumb" /></a>
                   </div>
-                  <span className="tranding">
+                  {/* <span className="tranding">
                     <FontAwesome name="bolt" />
-                  </span>
+                  </span> */}
                 </div>
                 <div className="single_post_text">
                   <div className="meta2">
-                    <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
+                    <Link href="">
                       <>
-                        <a href={"/article?"+ item.typearticle  +"?" + item.title}>{item.category}</a>
+                      <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>
                       </>
                     </Link>
                     <Link href={"/article?"+ item.typearticle  +"?" + item.title}>

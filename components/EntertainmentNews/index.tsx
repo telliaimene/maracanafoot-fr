@@ -27,12 +27,15 @@ const EntertainmentNews: FC<PageEntertainmentNewsProps> = ({   data  }) => {
             </div>
             <div className="single_post_text">
               <div className="meta3">
-                <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
+                <Link href="">
                 <>
                   {" "}
                  
-                      <a href={"/article?"+ item.typearticle  +"?" + item.title}>{item.category}</a> 
-                  </>
+                  <span
+            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
+          >
+            {item.category}
+          </span>                  </>
                 </Link>
                 <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
                   <>

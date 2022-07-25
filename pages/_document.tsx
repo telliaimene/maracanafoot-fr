@@ -14,32 +14,11 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" className="dark">
+      <Html >
         <Head>
-          <title>Maracana Foot</title>
-          <meta
-            property="image"
-            content="https://www.maracanafoot.com/utils/images/COMINGSOON.png"
-          />
-          <meta
-            name="description"
-            content="Maracana - Toute l'actualité sportive en continu"
-          />
-          <link rel="icon" href="/images/iconsite.jpg" />
-
-          <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-          <meta
-            property="og:viewport"
-            content="width=device-width, initial-scale=1"
-          />
           <link
             href="https://fonts.googleapis.com/css?family=Montserrat%7COpen+Sans:700,400%7CRaleway:400,800,900"
             rel="stylesheet"
-          />
-          <meta property="og:theme-color" content="#000000" />
-          <meta
-            property="og:description"
-            content="Web site created using create-react-app"
           />
           <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
           <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />

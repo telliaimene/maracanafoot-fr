@@ -1,4 +1,4 @@
-import React, { useState , useEffect,FC } from "react";
+import React, { useState, useEffect, FC } from "react";
 import { ArticleDataType } from "../../data/types";
 import Heading from "../uiStyle/Heading";
 import Swiper from "react-id-swiper";
@@ -51,13 +51,13 @@ const news = [
 ];
 export interface PageFeatureNewsProps {
   className?: string;
-  data:ArticleDataType[]
+  data: ArticleDataType[]
 }
 
 const FeatureNews: FC<PageFeatureNewsProps> = ({ className, data }) => {
   const [swiper, setSwiper] = useState<any>(null);
-console.log("fennec" , data)
-  
+  console.log("fennec", data)
+
   const goNext = () => {
     if (swiper !== null) {
       swiper.slideNext();
@@ -94,7 +94,7 @@ console.log("fennec" , data)
   };
   return (
     <div className={`feature_carousel_area mb40 ${className ? className : ""}`}>
-      {data.length ?   <div className="container">
+      {data.length ? <div className="container">
         <div className="row">
           <div className="col-12">
             <Heading title="ACTUALITÉ DES FENNECS" />
@@ -110,36 +110,39 @@ console.log("fennec" , data)
                     <div className="post_img gradient1">
                       <Link href="">
                         <>
-                        <a  href={"/article?"+ item.typearticle  +"?" + item.title}>
-                          <img
-                            style={{
-                              width:'510px',
-                              height:'330px'
-                            }}
-                            src={ item.image}
-                            alt="thumb"
-                          />
+                          <a href={"/article?" + item.typearticle + "?" + item.title}>
+                            <img
+                              style={{
+                                width: '510px',
+                                height: '330px'
+                              }}
+                              src={item.image}
+                              alt="thumb"
+                            />
                           </a>
                         </>
                       </Link>
                     </div>
                     <div className="single_post_text">
                       <div className="meta5">
-                        <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
+                        <Link href="">
                           <>
-                          <a  href={"/article?"+ item.typearticle  +"?" + item.title}>{item.category}</a>
-                          </>
+                            <span
+                              style={{ color: "#061da5", fontWeight: "bold", fontSize: "14px" }}
+                            >
+                              {item.category}
+                            </span>                          </>
                         </Link>
-                        <Link href={"/article?"+ item.typearticle  +"?" + item.title}>
+                        <Link href={"/article?" + item.typearticle + "?" + item.title}>
                           <>
-                            <a href={"/article?"+ item.typearticle  +"?" + item.title}>{item.date} </a>
+                            <a href={"/article?" + item.typearticle + "?" + item.title}>{item.date} </a>
                           </>
                         </Link>
                       </div>
                       <h4>
-                        <Link href={"/article?"+ item.typearticle +"?" + item.title}>
+                        <Link href={"/article?" + item.typearticle + "?" + item.title}>
                           <>
-                            <a  href={"/article?"+ item.typearticle  +"?" + item.title}>{item.title} </a>
+                            <a href={"/article?" + item.typearticle + "?" + item.title}>{item.title} </a>
                           </>
                         </Link>
                       </h4>
@@ -159,8 +162,8 @@ console.log("fennec" , data)
             {/*CAROUSEL END*/}
           </div>
         </div>
-      </div>: null}
-    
+      </div> : null}
+
     </div>
   );
 };

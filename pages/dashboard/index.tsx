@@ -6,8 +6,7 @@ import NavLink from "next/link";
 import DashboardEditProfile from "./edit-profile";
 import DashboardPosts from "./posts";
 import DashboardRoot from "./root";
-import DashboardSubcription from "./subscription";
-import DashboardSubmitPost from "./submit-post";
+
 import { Helmet } from "react-helmet";
 import HeaderContainer from "../../containers/HeaderContainer/HeaderContainer";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -44,7 +43,7 @@ const subPages: DashboardPage[] = [
     exact: true,
     component: DashboardRoot,
     emoij: "🕹",
-    pageName: "Dash board",
+    pageName: "DASHBOARD ",
   },
   // {
   //   sPath: "/posts",
@@ -85,7 +84,6 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
   const router=useRouter()
   const dispatch = useAppDispatch();
   let { pathname, route } = useRouter();
-  console.log("userouter", NavLink);
    const composant =() => {
     console.log("here in composant function")
   
@@ -97,11 +95,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
           case"/edit-profile":
           return (<DashboardEditProfile />)
           
-          case "/subscription":
-            return (<DashboardSubcription />)
-           
-              case "/submit-post":
-                return (<DashboardSubmitPost />)
+          
                 // case "/account":
                 //   return (<DashboardEditProfile />)
       }
@@ -128,7 +122,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
         <LayoutPage
         subHeading="Voir ton dashboard, gérer ton profil"
         headingEmoji="⚙"
-        heading="Dash board"
+        heading="DASHBOARD "
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
           {/* SIDEBAR */}
@@ -143,7 +137,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
                     >
                        <>
                       <a
-                        href={`${route}#${sPath.split('/')[1]}`}
+                      style={{cursor:"pointer"}}
                         className="flex px-6 py-2.5 font-medium rounded-lg hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                          onClick={e=> setPage(sPath)}
                       >

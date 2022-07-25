@@ -71,7 +71,7 @@ const ProductTwelve: FC<PageProductProps> = ({ product }) => {
     //     }
     // }
 
-
+console.log("image journal",  IMAGES_LINK + product?.image)
 
     return (
         <div className="product w-100" style={{ border: "none" }}>
@@ -107,6 +107,7 @@ const ProductTwelve: FC<PageProductProps> = ({ product }) => {
                             <LazyLoadImage
                                 alt="product"
                                 src={product?.image?.includes(".pdf") ? IMAGES_LINK + product?.image.replace("uploads", "pdf") : IMAGES_LINK + product?.image.replace("uploads", "image.php?size=300x370&f=")}
+                                //src={API_LINK + product?.image}
                                 threshold={500}
                                 effect="black-and-white"
                                 wrapperClassName="product-image"
