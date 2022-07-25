@@ -748,3 +748,11 @@ a {
 .bg-pagination {
   background-color: #0610a5;
 }
+.ads-billboard{width: 100%;height: 150px;}
+.ads-paver{width: 100%;height: auto;}
+.ads-popup{width: 100%;height: 100%;left: 0;top: 0;text-align: center;justify-content: center;align-items: center;z-index: 10;}
+.ads-popup-opacity{background-color: #000;width: 100%;height: 100%;position: fixed;top: 0;left: 0;opacity: .7;}
+.ads-popup video{margin-top: 10%;position: relative;z-index: 11;}
+.ads-popup span, .ads-interstitial span{position: fixed;right: 10px;font-size: 30px;color: #fff;z-index: 12;cursor: pointer;}
+.ads-interstitial{display: block;width: 100%;height: 100%;top: 0;left: 0;z-index: 12;}
+.ads-interstitial img{max-height: 500px;}

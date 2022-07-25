@@ -3449,6 +3449,26 @@ $colors: ('white': #ffffff, 'black': #000000) !default;
   position: absolute;
   top: 0;
   left: 0;
-  width: 120px;
-  height:100%;
+  width: 100px;
+  height:80%;
+
+}
+.videoWrapperBig iframe {
+
+  width: 700px;
+  height:350px;
+  max-width: 100%;
+
+}
+.ytp-large-play-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 47px;
+  margin-left: -18px;
+  margin-top: -24px;
+  -webkit-transition: opacity .25s cubic-bezier(0,0,0.2,1);
+  transition: opacity .25s cubic-bezier(0,0,0.2,1);
+  z-index: 64;
 }
