@@ -37,7 +37,7 @@ const subPages: DashboardPage[] = [
     exact: true,
     component: DashboardRoot,
     emoij: "🕹",
-    pageName: "DASHBOARD ",
+    pageName: "Dash board",
   },
   {
     sPath: "/posts",
@@ -82,7 +82,7 @@ const PageDashboard: FC<PageDashboardProps> = ({ className = "" }) => {
       <LayoutPage
         subHeading="View your dashboard, manage your Posts, Subscription, edit password and profile"
         headingEmoji="⚙"
-        heading="DASHBOARD "
+        heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
           {/* SIDEBAR */}

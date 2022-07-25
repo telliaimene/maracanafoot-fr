@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import PostCardSaveAction from "../../components/PostCardSaveAction/PostCardSaveAction";
-import { ArticleDataType } from "../../data/types";
+import { ArticleDataType, PostDataType } from "../../data/types";
 import Link  from "next/link";
 import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeList";
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
@@ -12,18 +12,16 @@ export interface Card11Props {
   post: ArticleDataType;
   ratio?: string;
   hiddenAuthor?: boolean;
-  url ?: string
 }
 
 const Card11: FC<Card11Props> = ({
   className = "h-full",
   post,
-  url,
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
   console.log('here in card',post)
-  const { title, date,typearticle } = post;
+  const { title, date,typearticle ,tournois} = post;
 
   const href = '/article?'+typearticle+"?"+title
 const sport=post?.typearticle
@@ -69,7 +67,7 @@ const categories=post?.category
           </Link>
         </h2>
         <div className="flex items-end justify-between mt-auto">
-          <PostCardLikeAndComment className="relative" postData={post} postId ={post?._id} url={post?.href}  />
+          <PostCardLikeAndComment className="relative" postData={post} postId ={post?._id} />
           <PostCardSaveAction className="relative" postData={post} dropdownPositon/>
         </div>
       </div>

@@ -104,7 +104,7 @@ export interface PageTrendingNewsSliderProps {
                             }}src={item.image} alt="thumb"/>
                             </a>
                             </div>
-                            {/* <span className="tranding"><FontAwesome name="fa-bolt"/></span> */}
+                            <span className="tranding"><FontAwesome name="fa-bolt"/></span>
                         </div>
                         <div className="single_post_text">
                             <div className="meta3"><Link  href={"/article?"+ item.typearticle +"?" + item.title}><> 

@@ -59,20 +59,16 @@ const SportsNews: FC<PageSportsNewsProps> = ({ dark , data, data2}) => {
                 />
               </>
             </Link>
-            {/* <span className="tranding">
+            <span className="tranding">
               <FontAwesome name="bolt" />
-            </span> */}
+            </span>
           </div>
 
           <div className="single_post_text">
             <div className="meta3">
               <Link href="">
                 <>
-                <span
-            style={{color: "#061da5", fontWeight: "bold" , fontSize:"14px"}}
-          >
-            {data.category}
-          </span>
+                  <a href="">{data.category}</a>
                 </>
               </Link>
               <Link href="">

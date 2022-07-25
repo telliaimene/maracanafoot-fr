@@ -18,7 +18,6 @@ export interface NcDropDownProps {
   renderItem?: (item: NcDropDownItem) => ReactNode;
   title?: string;
   onClick: (item: NcDropDownItem) => void;
-  style?:ReactNode
 }
 
 const NcDropDown: FC<NcDropDownProps> = ({
@@ -56,8 +55,7 @@ const NcDropDown: FC<NcDropDownProps> = ({
       >
         <Menu.Items
           className={`absolute origin-top-right right-0 w-56 mt-2 dark:bg-neutral-900 rounded-lg divide-y divide-neutral-100 shadow-lg ring-1 ring-black dark:ring-white ring-opacity-5 dark:ring-opacity-10 focus:outline-none z-30`}
-       style={{backgroundColor:'#fff'}}
-       >
+        >
           <div className="px-1 py-3 text-sm text-neutral-6000 dark:text-neutral-300">
             {data.map((item) => (
               <Menu.Item

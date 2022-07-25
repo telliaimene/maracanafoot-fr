@@ -15,7 +15,6 @@ const DashboardRoot  = () => {
         <NcLink href="#">Sign out</NcLink>) */}
       </span>
       Avec ce compte , vous pouvez voir ton dashboard , gérer 
-
       {` `}
       <NcLink href={"https://maracanafoot.fr"+'/dashboard#modifier-profil'} lien={"https://maracanafoot.fr"+'/dashboard#modifier-profil'}>Ton profil</NcLink>,
        {/* <NcLink href="#">Subscription</NcLink>, */}
