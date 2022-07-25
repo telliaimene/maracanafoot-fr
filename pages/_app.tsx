@@ -28,17 +28,17 @@ import MyRouter from "../routers/index";
 import { PersistGate } from "redux-persist/integration/react";
 
 function MyApp({ Component, pageProps }: any) {
-  // const router = useRouter();
-  // const [isShow, setIsShow] = useState(true);
-  // useEffect(() => {
-  //   if (router.pathname.includes("/pdf-")) {
-  //     setIsShow(false);
-  //     console.log("dash", isShow);
-  //   } else {
-  //     setIsShow(true);
-  //     console.log("accueil", isShow);
-  //   }
-  // }, [router.pathname, isShow]);
+   const router = useRouter();
+   const [isShow, setIsShow] = useState(true);
+  useEffect(() => {
+    if (router.pathname.includes("/pdf-")) {
+      setIsShow(false);
+      console.log("dash", isShow);
+    } else {
+      setIsShow(true);
+      console.log("accueil", isShow);
+    }
+  }, [router.pathname, isShow]);
   return (
     <div className=" text-base dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200">
       <Provider store={store}>
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }: any) {
         ) : (
           <PersistGate loading={null} persistor={persistor}>
             <Component {...pageProps} />
-            {/* {isShow ? <Footer /> : null} */}
+            {isShow ? <Footer /> : null}
           </PersistGate>
         )}
       </Provider>
